@@ -16,8 +16,6 @@ public class Solution {
             if (a < b) {
                 finishB--;
                 point++;
-            } else if (a == b) {
-                finishB--;
             }
             finishA--;
         }
