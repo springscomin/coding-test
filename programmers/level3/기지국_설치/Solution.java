@@ -3,33 +3,25 @@ package programmers.level3.기지국_설치;
 public class Solution {
     public int solution(int n, int[] stations, int w) {
         int answer = 0;
-        int[] check = new int[n + 1];
-        int startIdx = -1;
-
+        int start = 1;
+        int range = 2 * w + 1;
         for (int station : stations) {
-            check[station] = 1;
-            for (int i = 1; i <= w; i++) {
-                if (station + i <= n) check[station + i] = 1;
-
-                if (station - i > 0) check[station - i] = 1;
+            int diff = station - w - start;
+            if (diff > 0) {
+                answer += (diff / range);
+                if (diff % range != 0) answer++;
             }
-        }
 
-        for (int i = 1; i <= n; i++) {
-            if (check[i] != 1) {
-                startIdx = i;
-                break;
-            }
+            start = station + w + 1;
         }
+        if (start <= n) {
+            int diff = n - start + 1;
+            if (diff > 0) {
+                answer += (diff / range);
+                if (diff % range != 0) answer++;
+            }
 
-        while (startIdx < n) {
-            answer++;
-            startIdx += (2 * w + 1);
-            for (; startIdx <= n; startIdx++) {
-                if (check[startIdx] != 1) break;
-            }
         }
-        if (startIdx == n) answer++;
         return answer;
     }
 
