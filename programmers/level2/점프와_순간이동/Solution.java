@@ -2,12 +2,12 @@ package programmers.level2.점프와_순간이동;
 
 public class Solution {
     public int solution(int n) {
-        int[] memo = new int[n+1];
-        memo[1] = 1;
-        for (int i = 2; i <= n; i++){
-            if (i % 2 == 0) memo[i] = memo[i / 2];
-            else memo[i] = memo[i - 1] + 1;
-        }
-        return memo[n];
+        return find(n);
+    }
+
+    public int find(int n){
+        if (n == 1) return 1;
+        else if (n % 2 == 0) return find(n / 2);
+        else return find(n - 1) + 1;
     }
 }
