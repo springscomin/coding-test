@@ -9,18 +9,13 @@ class Solution {
         }
     }
     public int[] solution(int n, long left, long right) {
+        int size = (int)(right - left + 1);
         int[] answer = new int[(int)(right - left + 1)];
-        int[][] map = new int[n][n];
-
-        for (int i = 0; i < n; i++){
-            for (int j = 0; j < n; j++){
-                map[i][j] = Math.max(i, j) + 1;
-            }
-        }
-
-        int idx = 0;
-        for (long i = left; i <= right; i++){
-            answer[idx++] = map[(int)(i / n)][(int)(i % n)];
+        for (int i = 0; i < size; i++) {
+            int row = (int) (left/ n);
+            int col = (int) (left % n);
+            answer[i] = Math.max(row, col) + 1;
+            left++;
         }
         return answer;
     }
