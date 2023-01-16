@@ -5,23 +5,15 @@ import java.util.*;
 class Solution {
     public int solution(int[] people, int limit) {
         Arrays.sort(people);
+        int rightIdx = people.length - 1;
+        int leftIdx = 0;
 
-        boolean[] check = new boolean[people.length];
         int answer = 0;
-
-        for (int i = people.length - 1; i >= 0; i--){
-            if (check[i]) continue;
-            answer++;
-            int left = limit - people[i];
-            check[i] = true;
-            boolean flag = false;
-            for (int j = i - 1; j >= 0; j--){
-                if (!check[j] && left >= people[j]) {
-                    flag = true;
-                    check[j] = true;
-                    break;
-                }
+        while (leftIdx <= rightIdx){
+            if (people[leftIdx] + people[rightIdx--] <= limit) {
+                leftIdx++;
             }
+            answer++;
         }
         return answer;
     }
